@@ -28,8 +28,9 @@ const __dirname = path.dirname(__filename);
 app.use(express.static(path.join(appRoot, "client", "build")));
 
 app.get("*", function (req, res) {
-  const index = path.join(appRoot, "client", "build", "index.html");
-  res.sendFile(index);
+  const indexPath = path.resolve(appRoot, "client", "build", "index.html");
+  console.log("Serving index.html from:", indexPath);
+  res.sendFile(indexPath);
 });
 
 app.listen(7001, () => console.log("Server started"));
