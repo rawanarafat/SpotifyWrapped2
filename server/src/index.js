@@ -12,7 +12,7 @@ import { fileURLToPath, URL } from 'url';
 dotenv.config();
 const app = express();
 
-
+const appRoot = process.cwd();
 
 
 app.use(cors());
@@ -32,10 +32,11 @@ const __dirname = path.dirname(__filename);
 //app.use(express.static(path.join(__dirname, 'client', 'build')));
 
 // Catch-all route to serve the React app's HTML file
+app.use(express.static(path.join(appRoot, 'client', 'build')));
+
+// Catch-all route to serve the React app's HTML file
 app.get('*', (req, res) => {
-    const indexPath = path.join(__dirname, 'client', 'build', 'index.html');
-    console.log('Index file path:', indexPath);
-    res.sendFile(indexPath);
-  });
+  res.sendFile(path.join(appRoot, 'client', 'build', 'index.html'));
+});
 
 app.listen(7001, () => console.log("Server started"));
