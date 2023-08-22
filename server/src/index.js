@@ -6,6 +6,8 @@ import cookieParser from "cookie-parser";
 import { topRouter } from "./routes/top.js";
 import dotenv from "dotenv";
 import path from 'path';
+import { fileURLToPath, URL } from 'url';
+
 
 dotenv.config();
 const app = express();
@@ -21,6 +23,10 @@ app.use(express.json());
 
 app.use("/auth", userRouter);
 app.use("/mytop", topRouter);
+
+const __filename = fileURLToPath(import.meta.url);
+// Get the directory path
+const __dirname = path.dirname(__filename);
 
 // Serve static files from the React build directory
 app.use(express.static(path.join(__dirname, 'client', 'build')));
