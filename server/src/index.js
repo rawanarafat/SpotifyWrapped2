@@ -23,18 +23,12 @@ app.use("/auth", userRouter);
 app.use("/mytop", topRouter);
 
 const __filename = fileURLToPath(import.meta.url);
-// Get the directory path
 const __dirname = path.dirname(__filename);
 
-// Serve static files from the React build directory
-//app.use(express.static(path.join(__dirname, 'client', 'build')));
-
-// Catch-all route to serve the React app's HTML file
 app.use(express.static(path.join(appRoot, "client", "build")));
 
-// Catch-all route to serve the React app's HTML file
 app.get("*", function (req, res) {
-  const index = path.join(__dirname, "build", "index.html");
+  const index = path.join(appRoot, "client", "build", "index.html");
   res.sendFile(index);
 });
 
