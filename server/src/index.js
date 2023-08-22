@@ -29,11 +29,13 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // Serve static files from the React build directory
-app.use(express.static(path.join(__dirname, 'client', 'build')));
+//app.use(express.static(path.join(__dirname, 'client', 'build')));
 
 // Catch-all route to serve the React app's HTML file
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
-});
+    const indexPath = path.join(__dirname, 'client', 'build', 'index.html');
+    console.log('Index file path:', indexPath);
+    res.sendFile(indexPath);
+  });
 
 app.listen(7001, () => console.log("Server started"));
