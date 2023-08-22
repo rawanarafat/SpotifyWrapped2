@@ -14,23 +14,20 @@ const app = express();
 const appRoot = process.cwd();
 
 app.use(cors());
-
 app.use(cookieParser());
-
 app.use(express.json());
 
 app.use("/auth", userRouter);
 app.use("/mytop", topRouter);
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
+// Serve static files from the React build directory
 app.use(express.static(path.join(appRoot, "client", "build")));
 
+// Catch-all route to serve the React app's HTML file
 app.get("*", function (req, res) {
-  const indexPath = path.resolve(appRoot, "client", "build", "index.html");
-  console.log("Serving index.html from:", indexPath);
+  const indexPath = path.join(appRoot, "client", "build", "index.html");
   res.sendFile(indexPath);
 });
 
 app.listen(7001, () => console.log("Server started"));
+
