@@ -11,7 +11,7 @@ import { fileURLToPath, URL } from "url";
 dotenv.config();
 const app = express();
 
-const appRoot = process.cwd();
+
 
 app.use(cors());
 app.use(cookieParser());
@@ -21,12 +21,13 @@ app.use("/auth", userRouter);
 app.use("/mytop", topRouter);
 
 // Serve static files from the React build directory
-app.use(express.static(path.join(appRoot, "client", "build")));
+app.use(express.static(path.join(__dirname, 'client/build')));
 
-// Catch-all route to serve the React app's HTML file
-app.get("*", function (req, res) {
-  const indexPath = path.join(appRoot, "client", "build", "index.html");
-  res.sendFile(indexPath);
+// ... Define your API routes and other server configurations here
+
+// For any other routes, serve the index.html from the build folder
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
 });
 
 app.listen(7001, () => console.log("Server started"));
