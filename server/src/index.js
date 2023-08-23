@@ -7,7 +7,7 @@ import cookieParser from 'cookie-parser';
 import { topRouter } from './routes/top.js';
 import dotenv from 'dotenv';
 import path from 'path';
-import 'tailwindcss/tailwind.css';
+
 
 dotenv.config();
 const app = express();

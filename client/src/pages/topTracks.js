@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Cookies from "js-cookie";
 import myImage from "../assets/img2.jpg";
+import 'tailwindcss/tailwind.css';
 
 export const TopTracks = () => {
   const [topTracks, setTopTracks] = useState([]);

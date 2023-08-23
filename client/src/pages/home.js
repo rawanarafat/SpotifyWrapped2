@@ -4,6 +4,7 @@ import Cookies from "js-cookie";
 import axios from "axios";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpotify } from '@fortawesome/free-brands-svg-icons';
+import 'tailwindcss/tailwind.css';
 
 export const Home = () => {
   const navigate = useNavigate();
