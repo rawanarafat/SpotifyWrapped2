@@ -18,18 +18,14 @@ app.use(express.json());
 app.use("/auth", userRouter);
 app.use("/mytop", topRouter);
 
-// Get the current module's URL
-const __filename = fileURLToPath(import.meta.url);
-// Get the directory name from the module's URL
-const __dirname = path.dirname(__filename);
+const __dirname = dirname(new URL(import.meta.url).pathname);
 
 // Serve static files from the React build directory
-app.use(express.static(path.join(__dirname, '..', 'client', 'build')));
-
-// For any other routes, serve the index.html from the build folder
+app.use(express.static(path.resolve(__dirname, '..', 'client', 'build')));
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '..' , 'client','build', 'index.html'));
+  res.sendFile(path.resolve(__dirname, '..', 'client', 'build', 'index.html'));
 });
+
 
 app.listen(7001, () => console.log("Server started"));
 
