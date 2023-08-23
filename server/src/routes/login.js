@@ -34,7 +34,6 @@ router.get("/callback", async function (req, res) {
       method: "post",
       params: {
         code: code,
-        // Update the redirect_uri to match your deployment URL
         redirect_uri: "https://spotifywrapped.onrender.com/auth/callback",
         grant_type: "authorization_code",
       },
@@ -49,16 +48,24 @@ router.get("/callback", async function (req, res) {
 
     const response = await axios(authOptions);
 
-    // Your existing logic
-    // ...
-
-    // Update the redirect URL after successful authorization
+    // You can use the access token from the response to make requests to Spotify's API on behalf of the user
+    const access_token = response.data.access_token;
+    // You might also receive a refresh token, depending on the scope you requested
+    res.cookie("access_token", access_token);
+    res.cookie("spotifyExpiry", response.data.expires_in);
+    res.cookie("spotifyRefreshToken", response.data.refresh_token);
+    const tokenCreationTime = Date.now();
+    res.cookie("tokenCreationTime", tokenCreationTime);
+    // Further logic and processing can be performed here, such as saving the access token in a database or using it to fetch user data from Spotify
+    console.log(response.data, " + ", access_token);
+    //res.send("Authorization successful!");
+    //res.status(200).send("Authorization successful!");
     res.redirect("https://spotifywrapped.onrender.com/mytop/topTracks");
+    // Respond to the client or redirect to another page after successful authorization
   } catch (error) {
     console.error("Error exchanging the authorization code:", error);
     res.status(500).send("An error occurred during authorization.");
   }
 });
-
 
 export { router as userRouter };
