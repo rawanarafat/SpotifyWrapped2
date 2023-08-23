@@ -24,13 +24,11 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // Serve static files from the React build directory
-app.use(express.static(path.join(__dirname, '../client/build')));
-
-// ... Define your API routes and other server configurations here
+app.use(express.static(path.join(__dirname, '..', 'client', 'build')));
 
 // For any other routes, serve the index.html from the build folder
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
+  res.sendFile(path.join(__dirname, '..' , 'client','build', 'index.html'));
 });
 
 app.listen(7001, () => console.log("Server started"));
