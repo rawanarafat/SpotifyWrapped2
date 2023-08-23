@@ -1,4 +1,4 @@
-// server/index.js
+// server/src/index.js
 
 import express from 'express';
 import cors from 'cors';
@@ -22,11 +22,12 @@ app.use('/mytop', topRouter);
 const cwd = process.cwd();
 
 // Serve static files from the React build directory
-app.use(express.static(path.resolve(cwd, 'client', 'build')));
+app.use(express.static(path.resolve(cwd, '..', 'client', 'build')));
 
 // For any other routes, serve the index.html from the build folder
 app.get('*', (req, res) => {
-  res.sendFile(path.resolve(cwd, 'client', 'build', 'index.html'));
+  res.sendFile(path.resolve(cwd, '..', 'client', 'build', 'index.html'));
 });
 
 app.listen(7001, () => console.log('Server started'));
+
