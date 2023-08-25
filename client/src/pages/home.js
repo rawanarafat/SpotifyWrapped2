@@ -22,7 +22,7 @@ export const Home = () => {
       .then(() => {
         const accessToken = Cookies.get("access_token");
         if (accessToken) {
-          navigate("/mytop/topTracks");
+          navigate("/mytop/TopTracks");
           //alert("login successful");
         }
       })
