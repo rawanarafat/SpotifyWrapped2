@@ -12,7 +12,7 @@ function App() {
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="https://spotifywrapped.onrender.com/mytop/TopTracks" element={<TopTracks />} />
+          <Route path="/mytop/TopTracks" element={<TopTracks />} />
           <Route path="/mytop/topArtists" element={<TopArtists />} />
         </Routes>
       </Router>
