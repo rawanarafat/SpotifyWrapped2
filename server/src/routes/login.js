@@ -60,7 +60,7 @@ router.get("/callback", async function (req, res) {
     console.log(response.data, " + ", access_token);
     //res.send("Authorization successful!");
     //res.status(200).send("Authorization successful!");
-    res.redirect("https://spotifywrapped.onrender.com/mytop/Toptracks");
+    res.redirect("https://spotifywrapped.onrender.com/mytop/topTracks");
     // Respond to the client or redirect to another page after successful authorization
   } catch (error) {
     console.error("Error exchanging the authorization code:", error);
